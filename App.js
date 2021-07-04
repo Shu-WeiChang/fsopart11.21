@@ -25,6 +25,12 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, us
     logger.error('error connecting to MongoDB:', error.message)})
 
 
+
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
+
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
