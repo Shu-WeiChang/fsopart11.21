@@ -1,7 +1,7 @@
 const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
-const app = require('./app')
+const app = require('./App')
 
 
 const PORT = process.env.PORT || 3003
