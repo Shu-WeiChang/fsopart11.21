@@ -10,6 +10,7 @@ const mongoose = require('mongoose')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const commentsRouter = require("./controllers/comments")
+const healthRouter = require("./controllers/health")
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -25,12 +26,6 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, us
     logger.error('error connecting to MongoDB:', error.message)})
 
 
-
-app.get('/health', (req, res) => {
-  res.send('ok')
-})
-
-
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
@@ -41,6 +36,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/blogs', blogsRouter)
 app.use("/api/comments", commentsRouter)
+app.use("/health", healthRouter)
 
 if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')
